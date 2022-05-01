@@ -2,8 +2,6 @@ package com.binance.api.domain.event;
 
 
 import com.binance.api.client.domain.*;
-import com.binance.api.client.domain.account.AssetBalance;
-import com.binance.api.client.domain.event.AccountUpdateEvent;
 import com.binance.api.client.domain.event.ExecutionReport;
 import com.binance.api.client.domain.event.OrderTradeUpdate;
 import com.binance.api.client.domain.event.UserDataUpdateEvent;

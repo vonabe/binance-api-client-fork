@@ -35,12 +35,21 @@ public class UserDataUpdateEvent {
 
     private AssetsModeChange assetsModeChange;
 
-    private AccountUpdateEvent accountUpdateEvent;
+    private AccountUpdatePositionEvent accountUpdatePositionEvent;
 
     private BalanceUpdateEvent balanceUpdateEvent;
 
     private ExecutionReport executionReport;
     private OrderTradeUpdate orderTradeUpdate;
+    private AccountUpdateEvent accountUpdateEvent;
+
+    public void setAccountUpdateEvent(AccountUpdateEvent accountUpdateEvent) {
+        this.accountUpdateEvent = accountUpdateEvent;
+    }
+
+    public AccountUpdateEvent getAccountUpdateEvent() {
+        return accountUpdateEvent;
+    }
 
     public UserDataUpdateEventType getEventType() {
         return eventType;
@@ -66,12 +75,12 @@ public class UserDataUpdateEvent {
         this.leverageUpdate = leverageUpdate;
     }
 
-    public AccountUpdateEvent getAccountUpdateEvent() {
-        return accountUpdateEvent;
+    public AccountUpdatePositionEvent getAccountUpdatePositionEvent() {
+        return accountUpdatePositionEvent;
     }
 
-    public void setAccountUpdateEvent(AccountUpdateEvent accountUpdateEvent) {
-        this.accountUpdateEvent = accountUpdateEvent;
+    public void setAccountUpdatePositionEvent(AccountUpdatePositionEvent accountUpdatePositionEvent) {
+        this.accountUpdatePositionEvent = accountUpdatePositionEvent;
     }
 
     public BalanceUpdateEvent getBalanceUpdateEvent() {
@@ -106,7 +115,7 @@ public class UserDataUpdateEvent {
         if (eventType == UserDataUpdateEventType.ACCOUNT_UPDATE) {
             sb.append("accountUpdateEvent", accountUpdateEvent);
         } else if (eventType == UserDataUpdateEventType.ACCOUNT_POSITION_UPDATE) {
-            sb.append("accountPositionUpdateEvent", accountUpdateEvent);
+            sb.append("accountPositionUpdateEvent", accountUpdatePositionEvent);
         } else if (eventType == UserDataUpdateEventType.BALANCE_UPDATE) {
             sb.append("balanceUpdateEvent", balanceUpdateEvent);
         } else if (eventType == UserDataUpdateEventType.ORDER_TRADE_UPDATE) {
@@ -121,5 +130,4 @@ public class UserDataUpdateEvent {
         }
         return sb.toString();
     }
-
 }

@@ -62,7 +62,7 @@ public class AccountBalanceCacheExample {
         client.onUserDataUpdateEvent(listenKey, response -> {
             if (response.getEventType() == ACCOUNT_UPDATE) {
                 // Override cached asset balances
-                for (AssetBalance assetBalance : response.getAccountUpdateEvent().getBalances()) {
+                for (AssetBalance assetBalance : response.getAccountUpdatePositionEvent().getBalances()) {
                     accountBalanceCache.put(assetBalance.getAsset(), assetBalance);
                 }
                 System.out.println(accountBalanceCache);

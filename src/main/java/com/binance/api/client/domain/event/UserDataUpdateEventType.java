@@ -6,6 +6,7 @@ public enum UserDataUpdateEventType {
     EXECUTION_REPORT("executionReport"),
     ACCOUNT_UPDATE("ACCOUNT_UPDATE"), //Binance futures & testnet
     ACCOUNT_CONFIG_UPDATE("ACCOUNT_CONFIG_UPDATE"), //Binance futures & testnet //TODO: Implement this type.
+    LISTEN_KEY_EXPIRED("listenKeyExpired"),
     ORDER_TRADE_UPDATE("ORDER_TRADE_UPDATE"); //Binance futures & testnet
 
     private final String eventTypeId;
@@ -38,6 +39,9 @@ public enum UserDataUpdateEventType {
                 break;
             case "ORDER_TRADE_UPDATE":
                 et = UserDataUpdateEventType.ORDER_TRADE_UPDATE;
+                break;
+            case "listenKeyExpired":
+                et = UserDataUpdateEventType.LISTEN_KEY_EXPIRED;
                 break;
         }
         return et;

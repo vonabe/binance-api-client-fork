@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public enum TimeInForce {
   GTC,
+  GTE_GTC,
   IOC,
   FOK
 }

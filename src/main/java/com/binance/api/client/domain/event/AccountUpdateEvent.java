@@ -1,7 +1,8 @@
 package com.binance.api.client.domain.event;
 
-import com.binance.api.client.constant.BinanceApiConstants;
-import com.binance.api.client.domain.account.AssetBalance;
+import com.binance.api.client.domain.BalancePositionReasonType;
+import com.binance.api.client.domain.account.Balance;
+import com.binance.api.client.domain.account.Position;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -10,55 +11,53 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import java.util.List;
 
 /**
- * Account update event which will reflect the current position/balances of the account.
- *
- * This event is embedded as part of a user data update event.
- *
- * @see UserDataUpdateEvent
+ * @author telegram @vonabe on 29.04.2022.
+ * @project binance-api-client
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AccountUpdateEvent {
 
-  @JsonProperty("e")
-  private String eventType;
+    @JsonProperty("B")
+    @JsonDeserialize(contentUsing = BalanceDeserializer.class)
+    private List<Balance> balances;
 
-  @JsonProperty("E")
-  private long eventTime;
+    @JsonProperty("P")
+    @JsonDeserialize(contentUsing = PositionDeserializer.class)
+    private List<Position> position;
 
-  @JsonProperty("B")
-  @JsonDeserialize(contentUsing = AssetBalanceDeserializer.class)
-  private List<AssetBalance> balances;
+    @JsonProperty("m")
+    private BalancePositionReasonType type;
 
-  public String getEventType() {
-    return eventType;
-  }
+    public List<Balance> getBalances() {
+        return balances;
+    }
 
-  public void setEventType(String eventType) {
-    this.eventType = eventType;
-  }
+    public void setBalances(List<Balance> balances) {
+        this.balances = balances;
+    }
 
-  public long getEventTime() {
-    return eventTime;
-  }
+    public List<Position> getPosition() {
+        return position;
+    }
 
-  public void setEventTime(long eventTime) {
-    this.eventTime = eventTime;
-  }
+    public void setPosition(List<Position> position) {
+        this.position = position;
+    }
 
-  public List<AssetBalance> getBalances() {
-    return balances;
-  }
+    public BalancePositionReasonType getType() {
+        return type;
+    }
 
-  public void setBalances(List<AssetBalance> balances) {
-    this.balances = balances;
-  }
+    public void setType(BalancePositionReasonType type) {
+        this.type = type;
+    }
 
-  @Override
-  public String toString() {
-    return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE)
-        .append("eventType", eventType)
-        .append("eventTime", eventTime)
-        .append("balances", balances)
-        .toString();
-  }
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("balances", balances)
+                .append("position", position)
+                .append("type", type)
+                .toString();
+    }
 }

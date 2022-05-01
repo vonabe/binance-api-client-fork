@@ -2,7 +2,7 @@ package com.binance.api.examples;
 
 import com.binance.api.client.api.BinanceApiWebSocketClient;
 import com.binance.api.client.api.sync.BinanceApiSpotRestClient;
-import com.binance.api.client.domain.event.AccountUpdateEvent;
+import com.binance.api.client.domain.event.AccountUpdatePositionEvent;
 import com.binance.api.client.domain.event.ExecutionReport;
 import com.binance.api.client.factory.BinanceAbstractFactory;
 import com.binance.api.client.factory.BinanceSpotApiClientFactory;
@@ -30,9 +30,9 @@ public class UserDataStreamExample {
         // Listen for changes in the account
         webSocketClient.onUserDataUpdateEvent(listenKey, response -> {
             if (response.getEventType() == ACCOUNT_UPDATE) {
-                AccountUpdateEvent accountUpdateEvent = response.getAccountUpdateEvent();
+                AccountUpdatePositionEvent accountUpdatePositionEvent = response.getAccountUpdatePositionEvent();
                 // Print new balances of every available asset
-                System.out.println(accountUpdateEvent.getBalances());
+                System.out.println(accountUpdatePositionEvent.getBalances());
             } else {
                 ExecutionReport executionReport = response.getExecutionReport();
                 // Print details about an order/trade

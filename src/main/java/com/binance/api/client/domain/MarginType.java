@@ -9,5 +9,5 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public enum MarginType {
-    ISOLATED, CROSSED;
+    ISOLATED, CROSSED
 }

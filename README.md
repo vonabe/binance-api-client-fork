@@ -415,10 +415,10 @@ BEST BID: 0.05390000 / 2.26000000
 ```java
 client.onUserDataUpdateEvent(listenKey, response -> {
   if (response.getEventType() == UserDataUpdateEventType.ACCOUNT_UPDATE) {
-    AccountUpdateEvent accountUpdateEvent = response.getAccountUpdateEvent();
+    AccountUpdateEvent accountUpdatePositionEvent = response.getAccountUpdateEvent();
     
     // Print new balances of every available asset
-    System.out.println(accountUpdateEvent.getBalances());
+    System.out.println(accountUpdatePositionEvent.getBalances());
   } else {
     OrderTradeUpdateEvent executionReport = response.getOrderTradeUpdateEvent();
     

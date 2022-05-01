@@ -35,6 +35,7 @@ public class UserDataUpdateEventDeserializer extends JsonDeserializer<UserDataUp
 
             final String eventTypeId = node.get("e").asText();
             final long eventTime = node.get("E").asLong();
+//            {"e":"listenKeyExpired","E":1651367138988}
             UserDataUpdateEventType type = UserDataUpdateEventType.fromEventTypeId(eventTypeId);
             if (type == null) {
                 throw new BinanceApiException("Unknown user data event type [" + eventTypeId + "]");
@@ -48,9 +49,15 @@ public class UserDataUpdateEventDeserializer extends JsonDeserializer<UserDataUp
 
                 switch (type) {
                     case ACCOUNT_UPDATE:
+                        if (node.has("a")) {
+                            JsonNode a = node.get("a");
+                            AccountUpdateEvent accountUpdateEvent = getUserDataUpdateEventDetail(a.toString(), AccountUpdateEvent.class, mapper);
+                            userDataUpdateEvent.setAccountUpdateEvent(accountUpdateEvent);
+                        }
+                        break;
                     case ACCOUNT_POSITION_UPDATE:
-                        AccountUpdateEvent accountUpdateEvent = getUserDataUpdateEventDetail(json, AccountUpdateEvent.class, mapper);
-                        userDataUpdateEvent.setAccountUpdateEvent(accountUpdateEvent);
+                        AccountUpdatePositionEvent accountUpdatePositionEvent = getUserDataUpdateEventDetail(json, AccountUpdatePositionEvent.class, mapper);
+                        userDataUpdateEvent.setAccountUpdatePositionEvent(accountUpdatePositionEvent);
                         break;
                     case BALANCE_UPDATE:
                         BalanceUpdateEvent balanceUpdateEvent = getUserDataUpdateEventDetail(json, BalanceUpdateEvent.class, mapper);
